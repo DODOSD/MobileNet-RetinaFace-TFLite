@@ -74,7 +74,7 @@ The conversion involved multiple stages: PyTorch -> ONNX -> TensorFlow SavedMode
     pip install tensorflow numpy
 
     # Run the conversion script
-    python dodosd/tflite_converter_fp16.py
+    python MobileNet-RetinaFace-TFLite/tflite_converter_fp16.py
     ```
 -   **Notes:**
     -   The initial attempts using `TFLiteConverter` failed to correctly infer the input shape from the SavedModel (which had dynamic dimensions: `-1, 3, -1, -1`). The resulting TFLite models reported an incorrect fixed input shape like `[1 3 1 1]`.
@@ -91,7 +91,7 @@ The conversion involved multiple stages: PyTorch -> ONNX -> TensorFlow SavedMode
     pip install tensorflow numpy Pillow
 
     # Run the test script
-    python dodosd/test_tflite_fp16.py -m tflite-retinaface2/weights/480-float16.tflite -i tflite-retinaface2/imgs/test-img2.jpeg
+    python MobileNet-RetinaFace-TFLite/test_tflite_fp16.py -m tflite-retinaface2/weights/480-float16.tflite -i tflite-retinaface2/imgs/test-img2.jpeg
     ```
 -   **CRITICAL WORKAROUND:** Because the TFLite model file (`.tflite`) ended up with an incorrect static input shape signature (`[1 3 1 1]`) despite the SavedModel having dynamic shapes, it is **essential** to resize the input tensor using the TFLite interpreter *after* loading the model but *before* allocating tensors and running inference. The included `test_tflite_fp16.py` script demonstrates this:
     ```python
@@ -141,10 +141,10 @@ The script will attempt to use the lightweight `tflite_runtime` package first if
 **Usage:**
 
 ```bash
-# Make sure you have copied the 480-float16.tflite model into the dodosd/model/ directory
+# Make sure you have copied the 480-float16.tflite model into the MobileNet-RetinaFace-TFLite/model/ directory
 
 # Run the script, providing the path to the model
-python dodosd/realtime_detect.py -m dodosd/model/480-float16.tflite
+python MobileNet-RetinaFace-TFLite/realtime_detect.py -m MobileNet-RetinaFace-TFLite/model/480-float16.tflite
 
 # Optional arguments:
 # --conf_thresh: Confidence threshold (default: 0.5)
@@ -153,10 +153,10 @@ python dodosd/realtime_detect.py -m dodosd/model/480-float16.tflite
 # --use_full_tf: Force the use of the full TensorFlow library instead of tflite-runtime
 
 # Example with different thresholds:
-python dodosd/realtime_detect.py -m dodosd/model/480-float16.tflite --conf_thresh 0.6 --nms_thresh 0.3
+python MobileNet-RetinaFace-TFLite/realtime_detect.py -m MobileNet-RetinaFace-TFLite/model/480-float16.tflite --conf_thresh 0.6 --nms_thresh 0.3
 
 # Example forcing full TensorFlow:
-python dodosd/realtime_detect.py -m dodosd/model/480-float16.tflite --use_full_tf
+python MobileNet-RetinaFace-TFLite/realtime_detect.py -m MobileNet-RetinaFace-TFLite/model/480-float16.tflite --use_full_tf
 ```
 
 Press 'q' in the display window to quit the application. 
