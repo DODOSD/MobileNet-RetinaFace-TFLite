@@ -1,0 +1,24 @@
+# It is highly recommended to use a virtual environment (like venv or conda) 
+# to manage dependencies for this project.
+# Example: 
+# python -m venv venv
+# source venv/bin/activate  # or venv\Scripts\activate on Windows
+# pip install -r requirements.txt
+
+torch>=1.7.0
+torchvision>=0.8.1
+torchaudio>=0.7.0 # Added for potential audio processing if needed, often installed with torch
+onnx>=1.8.0
+onnxruntime>=1.6.0
+# onnx-tf is typically needed only inside the specific Docker environment 
+# used for ONNX->TensorFlow conversion, see README.
+
+tensorflow>=2.3.0
+# tflite-runtime is an alternative to the full tensorflow package for inference.
+# Installation can be platform-specific. Uncomment the line below if needed,
+# or install manually: https://www.tensorflow.org/lite/guide/python
+# tflite-runtime>=2.5.0
+
+numpy>=1.19.0
+opencv-python>=4.4.0
+Pillow>=7.2.0 

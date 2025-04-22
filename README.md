@@ -2,6 +2,50 @@
 
 This document outlines the steps taken to convert a PyTorch RetinaFace model (MobileNetV0.25 backbone) from the [biubug6/Pytorch_Retinaface](https://github.com/biubug6/Pytorch_Retinaface) repository (or similar forks like [tailtq/TFLite-RetinaFace](https://github.com/tailtq/TFLite-RetinaFace)) to the TensorFlow Lite (TFLite) Float16 format.
 
+## Setup & Requirements
+
+**1. Clone the Repository:**
+
+   ```bash
+   # Replace <your-repo-url> with the actual URL
+   git clone <your-repo-url>
+   cd <repository-folder>
+   ```
+
+**2. Create a Virtual Environment (Recommended):**
+
+   It's highly recommended to use a Python virtual environment (like `venv` or `conda`) to manage dependencies and avoid conflicts with other projects.
+
+   ```bash
+   # Using venv (Python 3.3+)
+   python -m venv venv
+   # Activate the environment
+   # On Windows (cmd.exe):
+   # venv\Scripts\activate.bat
+   # On Windows (PowerShell):
+   # venv\Scripts\Activate.ps1
+   # On Linux/macOS:
+   # source venv/bin/activate
+
+   # Using conda
+   # conda create -n retinaface_env python=3.8  # Or your preferred Python version
+   # conda activate retinaface_env
+   ```
+
+**3. Install Dependencies:**
+
+   Install the required Python packages using the provided `requirements.txt` file (located in the project root):
+
+   ```bash
+   # Make sure your virtual environment is active
+   pip install -r ../requirements.txt 
+   # Note: Use ../requirements.txt if you are inside the MobileNet-RetinaFace-TFLite folder
+   # Use requirements.txt if you are in the project root.
+   ```
+
+   *   **Note on `onnx-tf`:** This package is primarily needed for the ONNX to TensorFlow SavedModel conversion step (Step 2 below), which is often best performed within the specified Docker environment to avoid compatibility issues.
+   *   **Note on `tflite-runtime`:** The `requirements.txt` includes the full `tensorflow` package. If you prefer using only the TFLite interpreter for inference (e.g., on edge devices), you can install `tflite-runtime` separately. See the comments in `requirements.txt` and the [official TFLite guide](https://www.tensorflow.org/lite/guide/python) for platform-specific instructions.
+
 ## Goal
 
 The objective was to obtain a TFLite version of the RetinaFace face detection model suitable for deployment on edge devices or mobile platforms. We specifically targeted a Float16 model for a balance between size/performance and potential accuracy.
@@ -113,7 +157,7 @@ The conversion involved multiple stages: PyTorch -> ONNX -> TensorFlow SavedMode
 
 ## Final Model
 
-The final converted model is `480-float16.tflite`. Please place it in the `model/` subfolder within this documentation directory.
+The final converted model is `480-float16.tflite`. Please place it in the `model/` subfolder within this documentation directory (`MobileNet-RetinaFace-TFLite/model/`).
 
 ## License
 
