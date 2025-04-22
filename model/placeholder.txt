@@ -1,0 +1,3 @@
+# Placeholder file
+
+Please place the converted TFLite model (e.g., 480-float16.tflite) in this directory. 
