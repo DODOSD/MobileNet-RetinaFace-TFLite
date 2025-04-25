@@ -2,7 +2,7 @@
 
 This document outlines the steps taken to convert a PyTorch RetinaFace model (MobileNetV0.25 backbone) from the [biubug6/Pytorch_Retinaface](https://github.com/biubug6/Pytorch_Retinaface) repository (or similar forks like [tailtq/TFLite-RetinaFace](https://github.com/tailtq/TFLite-RetinaFace)) to the TensorFlow Lite (TFLite) Float16 format.
 
-Pre-converted models are available in the models folder, feel free to use them in your own projects. No need to credit me, just enjoy!
+Pre-converted models are available in the model folder, feel free to use them in your own projects. No need to credit me, just enjoy!
 
 ## Setup & Requirements
 
